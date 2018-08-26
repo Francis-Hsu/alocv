@@ -1,0 +1,34 @@
+Package: alocv
+Type: Package
+Title: Approximate Leave-One-Out Risk Estimation
+Version: 0.01
+Date: 2018-08-24
+Authors@R: 
+    c(person(given = "Linyun",
+             family = "He",
+             role = "aut",
+             email = "lh2870@columbia.edu"),
+      person(given = "Wanchao",
+             family = "Qin",
+             role = "aut",
+             email = "wq2137@columbia.edu"),
+      person(given = "Peng",
+             family = "Xu",
+             role = c("aut", "cre"),
+             email = "px2132@columbia.edu"),
+      person(given = "Yuze",
+             family = "Zhou",
+             role = "aut",
+             email = "yuze.zhou@columbia.edu"))
+Author: Linyun He <lh2870@columbia.edu> [aut],
+        Wanchao Qin <wq2137@columbia.edu> [aut],
+        Peng Xu <px2132@columbia.edu> [aut, cre],
+        Yuze Zhou <yuze.zhou@columbia.edu> [aut]
+Maintainer: Peng Xu <px2132@columbia.edu>
+Description: Computationally effcient approximation of the leave-one-out cross validation risk for (non)-smooth losses and regularizers.
+License: GPL-2
+Imports: Rcpp (>= 0.12.17)
+Depends: glmnet
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 6.1.0
+Encoding: UTF-8

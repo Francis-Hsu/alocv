@@ -1,0 +1,3 @@
+useDynLib(alocv, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+export(glmnetALO, coef.glmnetALO, plot.glmnetALO)
