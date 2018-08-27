@@ -1,11 +1,9 @@
-// -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 #include <RcppArmadillo.h>
 #include <math.h>
 
 using namespace Rcpp;
 
 //[[Rcpp::interfaces(r, cpp)]]
-//[[Rcpp::plugins(cpp11)]]
 //[[Rcpp::depends(RcppArmadillo)]]
 
 arma::mat elnetALO(const arma::mat &XE, const arma::vec &yHat, const arma::mat &y, 
