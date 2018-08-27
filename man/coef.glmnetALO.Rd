@@ -4,17 +4,19 @@
 \alias{coef.glmnetALO}
 \title{Extract the coefficients from a \code{glmnetALO} object}
 \usage{
-\method{coef}{glmnetALO}(obj, s = c("lambda.1se", "lambda.min"))
+\method{coef}{glmnetALO}(object, s = c("lambda.1se", "lambda.min"), ...)
 }
 \arguments{
-\item{obj}{Fitted \code{\link{glmnetALO}} object.}
+\item{object}{Fitted \code{\link{glmnetALO}} object.}
 
-\item{s}{Value of the penalty parameter \code{lambda} at which coefficients are required. 
+\item{s}{Value of the penalty parameter \code{lambda} at which coefficients are required.}
+
+\item{...}{Not used. 
 Default is the value \code{s = "lambda.1se"}. Alternatively \code{s = "lambda.min"} can be used. 
 If \code{s} is numeric, it is taken as the value of \code{lambda} to be used.}
 }
 \value{
-An matrix of coefficients, no coefficients will be returned if no matching \code{s} is found.
+An matrix of coefficients, nothing will be returned if no matching \code{s} is found.
 }
 \description{
 This function extracts coefficients from a \code{glmnetALO} object for the optimal value chosen for \code{lambda}.

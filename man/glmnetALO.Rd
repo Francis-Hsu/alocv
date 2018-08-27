@@ -48,7 +48,14 @@ with the first K (number of classes) rows being the respective intercepts.}
 This function computes the approximate leave-one-out risk estimation for the glmnet object provided.
 }
 \examples{
-fit = glmnet(X, y, family = "gaussian", alpha = 0.5, standardize = T)
-ALO_fit = glmnetALO(X, y, glm_obj = fit, alpha = 0.5, standardize = T, type.measure = "mse")
+n = 300
+p = 100
+k = 60
+beta = rnorm(p, 0, 1)
+beta[-(1:k)] = 0
+X = matrix(rnorm(n * p, 0, sqrt(1 / k)), n, p)
+y = X \%*\% beta + rnorm(n, 0, 0.5)
+fit = glmnet(X, y, family = "gaussian", alpha = 0.5, standardize = TRUE)
+ALO_fit = glmnetALO(X, y, glm_obj = fit, alpha = 0.5, standardize = TRUE, type.measure = "mse")
 }
 \keyword{ALO}

@@ -1,20 +1,21 @@
 #' Plot the ALO curve produced by \code{glmnetALO}
 #'
 #' Plots the ALO curve, and upper and lower standard deviation curves, as a function of the \code{lambda} values used.
-#' @param obj Fitted \code{\link{glmnetALO}} object.
+#' @param x Fitted \code{\link{glmnetALO}} object.
 #' @param ... Other graphical parameters to plot.
+#' @importFrom graphics abline axis points segments
 #' @export
-plot.glmnetALO = function(obj, ...) {
+plot.glmnetALO = function(x, ...) {
   # extract useful stuffs
-  obj_measure = obj$type.measure
-  obj_family = obj$family
-  obj_riskm = obj$alom
-  obj_riskup = obj$aloup
-  obj_risklo = obj$alolo
-  obj_lambda = obj$lambda
-  obj_lambda.min = obj$lambda.min
-  obj_lambda.1se = obj$lambda.1se
-  obj_nz = obj$nzeros
+  obj_measure = x$type.measure
+  obj_family = x$family
+  obj_riskm = x$alom
+  obj_riskup = x$aloup
+  obj_risklo = x$alolo
+  obj_lambda = x$lambda
+  obj_lambda.min = x$lambda.min
+  obj_lambda.1se = x$lambda.1se
+  obj_nz = x$nzeros
   
   log_param = log(obj_lambda)
   

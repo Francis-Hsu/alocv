@@ -4,10 +4,10 @@
 \alias{plot.glmnetALO}
 \title{Plot the ALO curve produced by \code{glmnetALO}}
 \usage{
-\method{plot}{glmnetALO}(obj, ...)
+\method{plot}{glmnetALO}(x, ...)
 }
 \arguments{
-\item{obj}{Fitted \code{\link{glmnetALO}} object.}
+\item{x}{Fitted \code{\link{glmnetALO}} object.}
 
 \item{...}{Other graphical parameters to plot.}
 }

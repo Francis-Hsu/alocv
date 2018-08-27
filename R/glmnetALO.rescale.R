@@ -1,4 +1,5 @@
 glmnetALO.rescale = function(X, a0, beta, intercept, family) {
+  n = nrow(X)
   mean_X = colMeans(X)
   sd_X = sqrt(colSums(X^2 / n) - colSums(X / n)^2)
   X = scale(X, center = intercept, scale = sd_X) # no centering if no intercept

@@ -116,7 +116,6 @@ arma::mat multinetALO(const arma::mat &XESp, const arma::vec &yHat, const arma::
   return(yALO);
 }
 
-// Vanilla, directly inverse matrices without attempting to update / downdate
 //[[Rcpp::export]]
 arma::mat glmnetALODirect(const arma::mat &X, const arma::mat &y, 
                           const arma::sp_mat &beta, const arma::vec &lambda, const double &alpha,
@@ -183,7 +182,6 @@ arma::mat glmnetALODirect(const arma::mat &X, const arma::mat &y,
   return yALO;
 }
 
-// Expand the X matrix for multinomial ALO
 // [[Rcpp::export]]
 arma::mat multinetExpand(const arma::mat &X, const arma::uword K) {
   arma::uword n = X.n_rows;
