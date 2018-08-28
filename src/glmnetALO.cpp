@@ -3,8 +3,9 @@
 
 using namespace Rcpp;
 
-//[[Rcpp::interfaces(r, cpp)]]
-//[[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::interfaces(r, cpp)]]
+// [[Rcpp::plugins(cpp14)]]
+// [[Rcpp::depends(RcppArmadillo)]]
 
 arma::mat elnetALO(const arma::mat &XE, const arma::vec &yHat, const arma::mat &y, 
                    const double &lambda, const double &alpha, const bool &intercept) {
