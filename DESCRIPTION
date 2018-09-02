@@ -27,7 +27,7 @@ Maintainer: Peng Xu <px2132@columbia.edu>
 Description: Computationally effcient approximation of the
     leave-one-out cross validation risk for (non)-smooth losses and
     regularizers.
-License: GPL-2
+License: GPL-3
 URL: https://github.com/Francis-Hsu/alocv
 BugReports: https://github.com/Francis-Hsu/alocv/issues
 Depends: 
