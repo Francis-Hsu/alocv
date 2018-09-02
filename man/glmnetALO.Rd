@@ -7,13 +7,13 @@
 glmnetALO(X, y, glm_obj, alpha, standardize, type.measure = "mse")
 }
 \arguments{
-\item{X}{Input data matrix.}
+\item{X}{Input data matrix. Format should agree with that of the \code{glmnet} object.}
 
-\item{y}{Response variable.}
+\item{y}{Response variable. Format should agree with that of the \code{glmnet} object.}
 
-\item{glm_obj}{An \code{glmnet} object.}
+\item{glm_obj}{A fitted \code{glmnet} object.}
 
-\item{alpha}{The elasticnet mixing parameter. Must agree with the value used to fit the \code{glmnet} object provided.}
+\item{alpha}{The elastic-net mixing parameter. Must agree with the value used to fit the \code{glmnet} object provided.}
 
 \item{standardize}{Whether the \code{glmnet} object is fitted with x variable standardization.}
 
@@ -21,8 +21,8 @@ glmnetALO(X, y, glm_obj, alpha, standardize, type.measure = "mse")
 \itemize{
   \item For \code{"gaussian"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
   \item For \code{"binomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
-  \item For \code{"poisson"} family, support \code{"mse"}, and \code{"mae"};
-  \item For \code{"multinomial"} family, support \code{"mse"}, and \code{"mae"};
+  \item For \code{"poisson"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+  \item For \code{"multinomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
 }}
 }
 \value{

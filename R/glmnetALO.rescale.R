@@ -1,3 +1,4 @@
+# scale the covariates and undo the un-standardization by glmnet on the regression coefficients
 glmnetALO.rescale = function(X, a0, beta, intercept, family) {
   n = nrow(X)
   mean_X = colMeans(X)

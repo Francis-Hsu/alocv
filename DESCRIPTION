@@ -1,8 +1,8 @@
 Type: Package
 Package: alocv
 Title: Approximate Leave-One-Out Risk Estimation
-Version: 0.01
-Date: 2018-08-24
+Version: 0.02
+Date: 2018-09-02
 Authors@R: 
     c(person(given = "Linyun",
              family = "He",

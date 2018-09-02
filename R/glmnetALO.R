@@ -1,17 +1,17 @@
 #' Compute ALO risk for glmnet object
 #'
 #' This function computes the approximate leave-one-out risk estimation for the glmnet object provided.
-#' @param X Input data matrix.
-#' @param y Response variable.
-#' @param glm_obj An \code{glmnet} object.
-#' @param alpha The elasticnet mixing parameter. Must agree with the value used to fit the \code{glmnet} object provided.
+#' @param X Input data matrix. Format should agree with that of the \code{glmnet} object.
+#' @param y Response variable. Format should agree with that of the \code{glmnet} object.
+#' @param glm_obj A fitted \code{glmnet} object.
+#' @param alpha The elastic-net mixing parameter. Must agree with the value used to fit the \code{glmnet} object provided.
 #' @param standardize Whether the \code{glmnet} object is fitted with x variable standardization.
 #' @param type.measure Loss to use for CV risk estimation.
 #' \itemize{
 #'   \item For \code{"gaussian"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
 #'   \item For \code{"binomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
-#'   \item For \code{"poisson"} family, support \code{"mse"}, and \code{"mae"};
-#'   \item For \code{"multinomial"} family, support \code{"mse"}, and \code{"mae"};
+#'   \item For \code{"poisson"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+#'   \item For \code{"multinomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
 #' }
 #' @return An object with S3 class "glmnetALO".
 #' \item{yALO}{The approximate leave-i-out fitted value.}
@@ -44,13 +44,6 @@
 #' ALO_fit = glmnetALO(X, y, glm_obj = fit, alpha = 0.5, standardize = TRUE, type.measure = "mse")
 
 glmnetALO = function(X, y, glm_obj, alpha, standardize, type.measure = "mse") {
-  # coerce format
-  X = as.matrix(X)
-  y = as.matrix(y)
-  
-  n = nrow(X) # number of observations
-  K = ncol(y) # number of classes, for multinomial regression
-  
   # extract useful stuffs from the glmnet object
   glm_family = class(glm_obj)[1]
   glm_lambda = glm_obj$lambda # assume at least 2 lambdas
@@ -68,8 +61,24 @@ glmnetALO = function(X, y, glm_obj, alpha, standardize, type.measure = "mse") {
                       multnet = 3,
                       stop("Unsupported regression family, 
                            must be \"gaussian\", \"binomial\", \"poisson\", or \"multinomial\""))
-  
   # Preprocessing
+  # coerce input format
+  X = as.matrix(X)
+  if(family_idx == 1 || family_idx == 3) {
+    if(!is.matrix(y)) {
+      y = as.factor(y)
+      nc = as.integer(length(table(y)))
+      y = diag(nc)[as.numeric(y), ]
+    }
+  } else {
+    y = as.matrix(y)
+  }
+  if(family_idx == 1) {
+    y = y[, 2, drop = F] # glmnet treated the second column as the target class
+  }
+  n = nrow(X) # number of observations
+  K = ncol(y) # number of classes, for multinomial regression
+  
   # standardize input and restandardize coefficients
   if (standardize) {
     glm_rescale = glmnetALO.rescale(X, glm_a0, glm_beta, intercept_flag, family_idx)
@@ -78,8 +87,9 @@ glmnetALO = function(X, y, glm_obj, alpha, standardize, type.measure = "mse") {
     glm_beta = glm_rescale$betas
   }
   
-  # prepare beta and intercept
+  # prepare covariates and coefficients
   if (family_idx == 3) {
+    # convert factor to indicator matrix
     X = multinetExpand(X, K)
     glm_beta = do.call(rbind, glm_beta)
     if (intercept_flag) {
@@ -92,9 +102,9 @@ glmnetALO = function(X, y, glm_obj, alpha, standardize, type.measure = "mse") {
       glm_beta = rbind(glm_a0, glm_beta)
     }
   }
-  # glm_beta = unname(glm_beta) # Drop the names
+  # glm_beta = unname(glm_beta) # drop the names
   
-  # identify active set, find variables to drop/remove
+  # identify active set, find variables to add/remove
   M = length(glm_lambda)
   glm_active_set = lapply(1:M, function(i) { which(abs(glm_beta[, i]) >= 1e-8) - 1 })
   glm_add_idx = lapply(2:M, function(i) {
@@ -106,7 +116,7 @@ glmnetALO = function(X, y, glm_obj, alpha, standardize, type.measure = "mse") {
   })
   
   # compute ALO and corresponding risk
-  y_alo = glmnetALODirect(X, as.matrix(y), glm_beta, glm_lambda, alpha, 
+  y_alo = glmnetALODirect(X, y, glm_beta, glm_lambda, alpha, 
                           glm_add_idx, glm_rmv_idx, 
                           family_idx, intercept_flag)
   alo_risk = glmnetALO.risk(y_alo, y, family_idx, type.measure)
