@@ -1,13 +1,25 @@
 # estimate risks for fitted ALO value
 # most are taken direcly from glmnet package (2.0-16), with minor modifications
-glmnetALO.risk = function(yalo, y, family, type.measure) {
-  if (family == 0) {# linear
+glmnetALO.risk = function(yalo, y, family_id, type.measure) {
+  # check if type.measure is valid for the given regression family
+  family_name = c("Gaussian", "binomial", "Poisson", "multinomial")
+  valid_measure = switch(family_id + 1,
+                         c("mse", "mae", "deviance"),
+                         c("mse", "mae", "class", "deviance"),
+                         c("mse", "mae", "deviance"),
+                         c("mse", "mae", "class", "deviance"))
+  if (!match(type.measure, valid_measure, FALSE)) {
+    type.measure = "deviance"
+    warning("Unsupported type.measure for ", family_name[family_id + 1], " model, ", "deviance used instead.")
+  }
+  
+  if (family_id == 0) {# linear
     errmat = sweep(yalo, 1, y)
     aloraw = switch(type.measure,
                     mse = errmat^2,
                     deviance = errmat^2,
                     mae = abs(errmat))
-  } else if (family == 1) {# logistic
+  } else if (family_id == 1) {# logistic
     # convert to indicator matrix
     y = as.factor(y)
     nc = as.integer(length(table(y)))
@@ -28,7 +40,7 @@ glmnetALO.risk = function(yalo, y, family, type.measure) {
                       ly = drop((y * ly) %*% c(1, 1))
                       2 * (ly - lp)
                     })
-  } else if (family == 2) {# Poisson
+  } else if (family_id == 2) {# Poisson
     aloraw = switch(type.measure,
                     mse = (sweep(exp(yalo), 1, y))^2,
                     mae = abs(sweep(exp(yalo), 1, y)),
@@ -38,7 +50,7 @@ glmnetALO.risk = function(yalo, y, family, type.measure) {
                       devy[y == 0] = 0
                       2 * sweep(-deveta, 1, devy, "+")
                     })
-  } else if (family == 3) {# multinomial
+  } else if (family_id == 3) {# multinomial
     m = ncol(yalo)
     n = nrow(y)
     K = ncol(y)
