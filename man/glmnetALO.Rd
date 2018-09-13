@@ -20,10 +20,10 @@ glmnetALO(X, y, glm_obj, alpha, standardize, type.measure = c("mse",
 
 \item{type.measure}{Loss to use for CV risk estimation. Default to \code{"deviance"}.
 \itemize{
-  \item For \code{"gaussian"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
-  \item For \code{"binomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
-  \item For \code{"poisson"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
-  \item For \code{"multinomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"}.
+  \item For \code{"gaussian"} family, one of \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+  \item For \code{"binomial"} family, one of \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
+  \item For \code{"poisson"} family, one of \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+  \item For \code{"multinomial"} family, one of \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"}.
 }}
 }
 \value{

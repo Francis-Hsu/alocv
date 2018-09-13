@@ -8,10 +8,10 @@
 #' @param standardize Whether the \code{glmnet} object is fitted with x variable standardization.
 #' @param type.measure Loss to use for CV risk estimation. Default to \code{"deviance"}.
 #' \itemize{
-#'   \item For \code{"gaussian"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
-#'   \item For \code{"binomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
-#'   \item For \code{"poisson"} family, support \code{"mse"}, \code{"mae"}, and \code{"deviance"};
-#'   \item For \code{"multinomial"} family, support \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"}.
+#'   \item For \code{"gaussian"} family, one of \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+#'   \item For \code{"binomial"} family, one of \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"};
+#'   \item For \code{"poisson"} family, one of \code{"mse"}, \code{"mae"}, and \code{"deviance"};
+#'   \item For \code{"multinomial"} family, one of \code{"mse"}, \code{"mae"}, \code{"class"}, and \code{"deviance"}.
 #' }
 #' @return An object with S3 class "glmnetALO".
 #' \item{yALO}{The approximate leave-i-out fitted value.}
