@@ -3,7 +3,7 @@ Package: alocv
 Title: Approximate Leave-One-Out Risk Estimation
 Version: 0.03
 Date: 2018-09-12
-Authors@R: 
+Authors@R:
     c(person(given = "Linyun",
              family = "He",
              role = "aut",
@@ -30,12 +30,15 @@ Description: Computationally effcient approximation of the
 License: GPL-3
 URL: https://github.com/Francis-Hsu/alocv
 BugReports: https://github.com/Francis-Hsu/alocv/issues
-Depends: 
+Depends:
     glmnet
-Imports: 
+Imports:
     Rcpp (>= 0.12.18)
-LinkingTo: 
+LinkingTo:
     Rcpp,
     RcppArmadillo
 Encoding: UTF-8
 RoxygenNote: 6.1.0
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
