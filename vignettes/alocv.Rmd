@@ -18,18 +18,17 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`alocv` is a package that implements the method proposed by Wang *et al*. (2018). In short, it approximates the leave-one-out cross-validation (LOOCV) risk for several standard models, using only the full-data solution. Since the model no longer needs to be fitted $n$ times, the LOOCV estimates can be obtained very efficiently, even in the case when n is so large that leave-one-out is infeasible.
+`alocv` is a package that implements the method proposed by Wang *et al*. (2018). In short, it approximates the leave-one-out cross-validation (LOOCV) risk for several standard models, using only the full-data solution. Since the model no longer needs to be fitted $n$ times, the LOOCV estimates can be obtained very efficiently, even in the case when $n$ is so large that leave-one-out is infeasible.
 
 This package currently supports LOOCV approximation for Elastic-net GLM (`glmnet`) and SVM (`e1071`).
 
 ## Usage with `glmnet`
 We begin by loading our package, of course:
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = TRUE, echo = TRUE}
 library(alocv)
+library(glmnet)
 ```
-```r
-glmnetALO(X, y, glm_obj, alpha, standardize, type.measure)
-```
+
 For demonstration, we will now create some artifical data of size $n=500$ and $p=200$, with $k=100$ non-zero coefficients:
 ```{r, eval = TRUE}
 n = 500
@@ -51,19 +50,23 @@ CV_el = cv.glmnet(X, y, alpha = 0.5, nfolds = n,
                   grouped = F, intercept = T, standardize = T, type.measure = "mse")
 proc.time() - ptm
 ```
-
+In comparison, `alocv` requires only fractions of a second to produce an LOOCV estimation:
 
 
 ```{r, eval = TRUE}
 ptm = proc.time()
 GLM_el = glmnet(X, y, lambda = CV_el$lambda, alpha = 0.5, intercept = T, standardize = T)
-ALO_el = glmnetALO(X, y, GLM_el, 0.5, standardize = T, type.measure = "mse")
+ALO_el = alo_glmnet(X, y, alpha=0.5, standardize=T, intercept=T)
 proc.time() - ptm
 ```
+Not only that, the estimation is very accurate, as compared to the true LOOCV risk:
 
 ```{r}
-plot(ALO_el)
+plot(CV_el$cvm, xlab = "lambda", ylab = "Risk", type = "l", lwd = 2, col = "darkorange")
+lines(ALO_el$alo, type = "b", pch = 4, lwd = 2, col = 4)
 ```
+
+## Usage with `e1071`
 
 ## Reference
 K. Rahnama Rad, A. Maleki (2018). [*A scalable estimate of the extra-sample prediction error via approximate leave-one-out*](https://arxiv.org/abs/1801.10243).
