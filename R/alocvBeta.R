@@ -1,4 +1,4 @@
-#' @useDynLib alocv.beta, .registration=TRUE
+#' @useDynLib alocvBeta, .registration=TRUE
 #' @importFrom Rcpp evalCpp
 #' @import glmnet e1071
 NULL

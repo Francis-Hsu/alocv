@@ -1,5 +1,5 @@
 Type: Package
-Package: alocv.beta
+Package: alocvBeta
 Title: Approximate Leave-One-Out Risk Estimation
 Version: 0.05
 Date: 2019-02-17

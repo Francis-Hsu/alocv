@@ -2,34 +2,34 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 glmnetALODirect <- function(X, y, beta, lambda, alpha, addList, dropList, family, intercept) {
-    .Call(`_alocv_beta_glmnetALODirect`, X, y, beta, lambda, alpha, addList, dropList, family, intercept)
+    .Call(`_alocvBeta_glmnetALODirect`, X, y, beta, lambda, alpha, addList, dropList, family, intercept)
 }
 
 multinetExpand <- function(X, K) {
-    .Call(`_alocv_beta_multinetExpand`, X, K)
+    .Call(`_alocvBeta_multinetExpand`, X, K)
 }
 
 svcALO <- function(X, y, w, b, lambda, tol) {
-    .Call(`_alocv_beta_svcALO`, X, y, w, b, lambda, tol)
+    .Call(`_alocvBeta_svcALO`, X, y, w, b, lambda, tol)
 }
 
 svcKerALO <- function(K, y, alpha, rho, lambda, tol) {
-    .Call(`_alocv_beta_svcKerALO`, K, y, alpha, rho, lambda, tol)
+    .Call(`_alocvBeta_svcKerALO`, K, y, alpha, rho, lambda, tol)
 }
 
 svrKerALO <- function(K, y, alpha, rho, lambda, epsilon, tol) {
-    .Call(`_alocv_beta_svrKerALO`, K, y, alpha, rho, lambda, epsilon, tol)
+    .Call(`_alocvBeta_svrKerALO`, K, y, alpha, rho, lambda, epsilon, tol)
 }
 
 gaussianKer <- function(X, gamma) {
-    .Call(`_alocv_beta_gaussianKer`, X, gamma)
+    .Call(`_alocvBeta_gaussianKer`, X, gamma)
 }
 
 polynomialKer <- function(X, gamma, coef0, degree) {
-    .Call(`_alocv_beta_polynomialKer`, X, gamma, coef0, degree)
+    .Call(`_alocvBeta_polynomialKer`, X, gamma, coef0, degree)
 }
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_alocv_beta_RcppExport_registerCCallable', PACKAGE = 'alocv.beta')
+    .Call('_alocvBeta_RcppExport_registerCCallable', PACKAGE = 'alocvBeta')
 })
