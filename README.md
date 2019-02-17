@@ -1,5 +1,5 @@
 # alocv
-This repository contains the beta version of the `alocv` package, the development has now been shifted to [Wenda Zhou's GitHub](https://github.com/wendazhou/alocv-package).
+This repository contains the beta development of the `alocv` package, the full version can be found on [Wenda Zhou's GitHub](https://github.com/wendazhou/alocv-package).
 
 ## Description
 Computationally effcient approximation of the leave-one-out cross validation risk for (non)-smooth losses and regularizers.
