@@ -9,6 +9,50 @@ multinetExpand <- function(X, K) {
     .Call(`_alocv_multinetExpand`, X, K)
 }
 
+svmALO_LIBLINEAR <- function(lambda, X, y, w, b, b_scaling, tol) {
+    .Call(`_alocv_svmALO_LIBLINEAR`, lambda, X, y, w, b, b_scaling, tol)
+}
+
+svmALO <- function(X, y, w, b, lambda, tol) {
+    .Call(`_alocv_svmALO`, X, y, w, b, lambda, tol)
+}
+
+svmKerALO <- function(K, y, alpha, rho, lambda, tol) {
+    .Call(`_alocv_svmKerALO`, K, y, alpha, rho, lambda, tol)
+}
+
+nuSvcKerALO <- function(K, y, alpha, rho, nu, r, tol) {
+    .Call(`_alocv_nuSvcKerALO`, K, y, alpha, rho, nu, r, tol)
+}
+
+svrKerALO <- function(K, y, alpha, rho, lambda, epsilon, tol) {
+    .Call(`_alocv_svrKerALO`, K, y, alpha, rho, lambda, epsilon, tol)
+}
+
+gaussianKer <- function(X, gamma) {
+    .Call(`_alocv_gaussianKer`, X, gamma)
+}
+
+sigmoidKer <- function(X, gamma, coef0) {
+    .Call(`_alocv_sigmoidKer`, X, gamma, coef0)
+}
+
+polynomialKer <- function(X, gamma, coef0, degree) {
+    .Call(`_alocv_polynomialKer`, X, gamma, coef0, degree)
+}
+
+gaussianKerApprox <- function(X, gamma) {
+    .Call(`_alocv_gaussianKerApprox`, X, gamma)
+}
+
+sigmoidKerApprox <- function(X, gamma, coef0) {
+    .Call(`_alocv_sigmoidKerApprox`, X, gamma, coef0)
+}
+
+polynomialKerApprox <- function(X, gamma, coef0, degree) {
+    .Call(`_alocv_polynomialKerApprox`, X, gamma, coef0, degree)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('_alocv_RcppExport_registerCCallable', PACKAGE = 'alocv')
