@@ -1,5 +1,5 @@
 #' @details
-#' Only support elastic net regressions for now.
+#'Support elastic net regressions and SVM.
 #' @references 
 #' \itemize{
 #' \item K. Rahnama Rad, A. Maleki, \emph{A scalable estimate of the extra-sample prediction error via approximate leave-one-out}, (2018), \url{https://arxiv.org/abs/1801.10243}.

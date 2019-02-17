@@ -4,7 +4,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::interfaces(r, cpp)]]
-// [[Rcpp::plugins(cpp14)]]
+// [[Rcpp::plugins(cpp11)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 
 arma::mat elnetALO(const arma::mat &XE, const arma::vec &yHat, const arma::mat &y, 

@@ -8,8 +8,8 @@ using namespace arma;
 //[[Rcpp::depends(RcppArmadillo)]]
 
 //[[Rcpp::export]]
-vec svcALO(const mat &X, const vec &y, const vec &w, const double &b, const double &lambda,
-           const double &tol) {
+arma::vec svcALO(const arma::mat &X, const arma::vec &y, const arma::vec &w, 
+           const double &b, const double &lambda, const double &tol) {
   arma::uword N = X.n_rows;
   arma::uword P = X.n_cols;
   arma::vec yHat = X * w + b;
@@ -48,8 +48,8 @@ vec svcALO(const mat &X, const vec &y, const vec &w, const double &b, const doub
 }
 
 //[[Rcpp::export]]
-vec svcKerALO(const mat &K, const vec &y, const vec &alpha, const double &rho, const double &lambda,
-              const double &tol) {
+arma::vec svcKerALO(const arma::mat &K, const arma::vec &y, const arma::vec &alpha, 
+              const double &rho, const double &lambda, const double &tol) {
   arma::uword N = y.n_elem;
 
   // augment the data and weight matrices with offset
@@ -91,8 +91,8 @@ vec svcKerALO(const mat &K, const vec &y, const vec &alpha, const double &rho, c
 }
 
 //[[Rcpp::export]]
-vec svrKerALO(const mat &K, const vec &y, const vec &alpha, const double &rho, const double &lambda, const double &epsilon,
-              const double &tol) {
+arma::vec svrKerALO(const arma::mat &K, const arma::vec &y, const arma::vec &alpha, 
+              const double &rho, const double &lambda, const double &epsilon, const double &tol) {
   arma::uword N = y.n_elem;
   
   // augment the data and weight matrices with offset
