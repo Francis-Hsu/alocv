@@ -9,7 +9,7 @@ using namespace arma;
 
 //[[Rcpp::export]]
 arma::vec svcALO(const arma::mat &X, const arma::vec &y, const arma::vec &w, 
-           const double &b, const double &lambda, const double &tol) {
+                 const double &b, const double &lambda, const double &tol) {
   arma::uword N = X.n_rows;
   arma::uword P = X.n_cols;
   arma::vec yHat = X * w + b;
@@ -49,7 +49,7 @@ arma::vec svcALO(const arma::mat &X, const arma::vec &y, const arma::vec &w,
 
 //[[Rcpp::export]]
 arma::vec svcKerALO(const arma::mat &K, const arma::vec &y, const arma::vec &alpha, 
-              const double &rho, const double &lambda, const double &tol) {
+                    const double &rho, const double &lambda, const double &tol) {
   arma::uword N = y.n_elem;
 
   // augment the data and weight matrices with offset
@@ -92,7 +92,7 @@ arma::vec svcKerALO(const arma::mat &K, const arma::vec &y, const arma::vec &alp
 
 //[[Rcpp::export]]
 arma::vec svrKerALO(const arma::mat &K, const arma::vec &y, const arma::vec &alpha, 
-              const double &rho, const double &lambda, const double &epsilon, const double &tol) {
+                    const double &rho, const double &lambda, const double &epsilon, const double &tol) {
   arma::uword N = y.n_elem;
   
   // augment the data and weight matrices with offset
@@ -144,13 +144,6 @@ arma::mat gaussianKer(const arma::mat &X, const double &gamma) {
   return arma::exp(-gamma * D);
 }
 
-// arma::mat sigmoidKer(const arma::mat &X, const double &gamma, const double &coef0) {
-//   // compute the kernel matrix
-//   arma::mat K = arma::tanh(gamma * X * X.t() + coef0);
-// 
-//   return K;
-// }
-
 //[[Rcpp::export]]
 arma::mat polynomialKer(const arma::mat &X, const double &gamma, const double &coef0, const int &degree) {
   // compute the kernel matrix
@@ -158,3 +151,10 @@ arma::mat polynomialKer(const arma::mat &X, const double &gamma, const double &c
 
   return K;
 }
+
+// arma::mat sigmoidKer(const arma::mat &X, const double &gamma, const double &coef0) {
+//   // compute the kernel matrix
+//   arma::mat K = arma::tanh(gamma * X * X.t() + coef0);
+// 
+//   return K;
+// }
